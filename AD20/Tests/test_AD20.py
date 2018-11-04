@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
-import ADnum
-import ADmath
+from AD20 import ADnum
+from AD20 import ADmath
 
 def test_ADmath_sin():
     X = ADnum(np.pi)
