@@ -62,11 +62,11 @@ class ADnum:
         try:
             return ADnum(self.val**other.val, other.val*(self.val**(other.val-1))*self.der+(self.der**other.val)*np.log(self.val)*other.der)
 
-        except:# when other is constant
+        except AttributeError:# when other is constant
             return ADnum(self.val**other, other*(self.val**(other-1))*self.der)
 
     def __rpow__(self, other):
         try:
             return ADnum(other.val**self.val, self.val*(other.val**(self.val-1))*other.der+(other.der**self.val)*np.log(other.val)*self.der)
-        except:
+        except AttributeError:
             return ADnum(other**self.val, np.log(other)*self.der)
