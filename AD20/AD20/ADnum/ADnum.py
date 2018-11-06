@@ -48,7 +48,7 @@ class ADnum:
         try:
             return ADnum(other.val/self.val, (self.val*other.der-other.val*self.der)/(self.val**2))
         except AttributeError:
-            return ADnum(other/self.val, other.val(self.))
+            return ADnum(other/self.val, other.val*self.__pow__(-1))
 
     def __pow__(self, other, modulo=None):
         ###???Questions on this method:
