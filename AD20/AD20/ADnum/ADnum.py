@@ -39,26 +39,18 @@ class ADnum:
         except AttributeError:
             return ADnum(other-self.val, self.der)
 
-    def __div__(self, other):
+    def __truediv__(self, other):
         try:
             return ADnum(self.val/other.val, (other.val*self.der-self.val*other.der)/(other.val**2))
         except AttributeError:
-            return ADnum(self.val/other,(1/other.val)*self.der)
-    def __rdiv__(self, other):
+            return ADnum(self.val/other,(1/other)*self.der)
+    def __rtruediv__(self, other):
         try:
             return ADnum(other.val/self.val, (self.val*other.der-other.val*self.der)/(self.val**2))
         except AttributeError:
-            return ADnum(other/self.val, other.val*self.__pow__(-1))
+            return ADnum(other/self.val, other*self.__pow__(-1).der)
 
     def __pow__(self, other, modulo=None):
-        ###???Questions on this method:
-        # 1. there won't be the case for x**f(x)???
-        # 2. Do we  need to differentiate constant term with the term that is constant to x?
-        # try:### the common case is that power is a constant term wrt x
-        #     return ADnum(self.val**power.val, power.val*(self.val**(power.val-1)))
-        # except AttributeError:
-        #
-        #     return ADnum(1/self.val, )
         try:
             return ADnum(self.val**other.val, other.val*(self.val**(other.val-1))*self.der+(self.der**other.val)*np.log(self.val)*other.der)
 
