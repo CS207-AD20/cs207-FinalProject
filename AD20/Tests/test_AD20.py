@@ -136,6 +136,76 @@ def test_ADmath_log():
     assert f.val == np.log(72)
     assert f.der == 1/72
     
+def test_ADmath_sin():
+    X = np.pi
+    Y = ADmath.sin(X)
+    assert Y.val == np.sin(np.pi)
+    assert Y.der == np.cos(np.pi)
+
+def test_ADmath_cos():
+    f = ADmath.cos(4)
+    assert f.val == np.cos(4)
+    assert f.der == -np.sin(4)
+
+def test_ADmath_tan():
+    f = ADmath.tan(4)
+    assert f.val == np.tan(4)
+    assert f.der == (1/np.cos(4))**2
+
+def test_ADmath_csc():
+    f = ADmath.csc(5)
+    assert f.val == 1/np.sin(5)
+    assert f.der == (-1/np.tan(5))*(1/np.sin(5))
+
+def test_ADmath_sec():
+    f = ADmath.sec(6)
+    assert f.val == 1/np.cos(6)
+    assert f.der == np.tan(6)/np.cos(6)
+
+def test_ADmath_cot():
+    f = ADmath.cot(1)
+    assert f.val == 1/np.tan(1)
+    assert f.der == -1/(np.sin(1)**2)
+
+def test_ADmath_arcsin():
+    f = ADmath.arcsin(.2)
+    assert f.val == np.arcsin(.2)
+    assert f.der == 1/(np.sqrt(1-.2**2))
+
+def test_ADmath_arccos():
+    f = ADmath.arccos(.3)
+    assert f.val == np.arccos(.3)
+    assert f.der == -1/(np.sqrt(1-.3**2))
+
+def test_ADmath_arctan():
+    f = ADmath.arctan(1)
+    assert f.val == np.arctan(1)
+    assert f.der == .5
+
+def test_ADmath_sinh():
+    f = ADmath.sinh(2)
+    assert f.val == np.sinh(2)
+    assert f.der == np.cosh(2)
+
+def test_ADmath_cosh():
+    f = ADmath.cosh(3)
+    assert f.val == np.cosh(3)
+    assert f.der == np.sinh(3)
+
+def test_ADmath_tanh():
+    f = ADmath.tanh(-5)
+    assert f.val == np.tanh(-5)
+    assert f.der == 1/(np.cosh(-5)**2)
+
+def test_ADmath_exp():
+    f = ADmath.exp(-3)
+    assert f.val == np.exp(-3)
+    assert f.der == np.exp(-3)
+
+def test_ADmath_log():
+    f = ADmath.log(72)
+    assert f.val == np.log(72)
+    assert f.der == 1/72
 
 # More advanced tests
 def test_12x():
