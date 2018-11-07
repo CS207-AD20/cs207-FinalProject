@@ -106,7 +106,7 @@ def test_ADmath_arccos():
     assert f.val == np.arccos(.3)
     assert f.val == -1/(np.sqrt(1-.3**2))
 
-def test_ADmath_arctan();
+def test_ADmath_arctan():
     f = ADmath.arctan(ADnum(1))
     assert f.val == arctan(1)
     assert f.der == .5
