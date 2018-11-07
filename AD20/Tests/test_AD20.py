@@ -7,7 +7,7 @@ from AD20 import ADmath
 def test_ADnum_init():
     x = ADnum(100, -2)
     assert x.val == 100
-    assert xder == -2
+    assert x.der == -2
 
 def test_ADnum_valtype():
     with pytest.raises(TypeError):

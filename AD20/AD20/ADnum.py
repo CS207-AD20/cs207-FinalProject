@@ -17,7 +17,7 @@ class ADnum:
             #return ADnum(self.val*other, other*self.der)
 
     def __rmul__(self,other):
-        return other*self
+        return self.__mul__(other)
         #try:
             #return ADnum(self.val*other.val, self.val*other.der+self.der*other.val)
         #except AttributeError:
@@ -32,7 +32,7 @@ class ADnum:
             #return ADnum(self.val+other, self.der)
 
     def __radd__(self,other):
-        return other + self
+        return self.__add__(other)
         #try:
          #   return ADnum(self.val+other.val,self.der+other.der)
         #except AttributeError:
