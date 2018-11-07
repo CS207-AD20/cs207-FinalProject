@@ -8,3 +8,15 @@ def test_ADmath_sin():
     Y = ADmath.sin(X)
     assert Y.val == np.sin(np.pi)
     assert Y.der == np.cos(np.pi)
+
+def test_ADmath_cos():
+    f = ADmath.cos(ADnum(4))
+    assert f.val == np.cos(4)
+    assert f.der == -np.sin(4)
+
+def test_ADmath_tan():
+    f = ADmath.tan(ADnum(np.pi/2))
+    assert f.val == np.tan(np.pi/2)
+    assert f.der == (1/np.cos(np.pi/2))**2
+
+
