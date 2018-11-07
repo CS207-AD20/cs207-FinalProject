@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f138ad0c-2b18-430e-8e63-02a629964eb3" name="Default" comment="" />
+    <list default="true" id="f138ad0c-2b18-430e-8e63-02a629964eb3" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AD20/AD20/ADnum.py" afterPath="$PROJECT_DIR$/AD20/AD20/ADnum.py" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,8 +43,8 @@
       <file leaf-file-name="ADnum.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/AD20/AD20/ADnum.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="39" column="42" lean-forward="false" selection-start-line="39" selection-start-column="42" selection-end-line="39" selection-end-column="42" />
+            <state relative-caret-position="330">
+              <caret line="63" column="72" lean-forward="false" selection-start-line="63" selection-start-column="72" selection-end-line="63" selection-end-column="72" />
               <folding />
             </state>
           </provider>
@@ -67,8 +70,8 @@
       <list>
         <option value="$PROJECT_DIR$/AD20/AD20/ADnum/ADnum.py" />
         <option value="$PROJECT_DIR$/AD20/AD20/ADmath/ADmath.py" />
-        <option value="$PROJECT_DIR$/AD20/AD20/ADnum.py" />
         <option value="$PROJECT_DIR$/AD20/Tests/test_AD20.py" />
+        <option value="$PROJECT_DIR$/AD20/AD20/ADnum.py" />
       </list>
     </option>
   </component>
@@ -372,7 +375,7 @@
           <line>3</line>
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="1" />
+      <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -498,8 +501,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/AD20/AD20/ADnum.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="39" column="42" lean-forward="false" selection-start-line="39" selection-start-column="42" selection-end-line="39" selection-end-column="42" />
+        <state relative-caret-position="330">
+          <caret line="63" column="72" lean-forward="false" selection-start-line="63" selection-start-column="72" selection-end-line="63" selection-end-column="72" />
           <folding />
         </state>
       </provider>
