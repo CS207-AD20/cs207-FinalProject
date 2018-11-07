@@ -1,6 +1,11 @@
 import numpy as np
 class ADnum:
     def __init__(self, value, der = 1): #this needs to be modified for multivar--For der default value, we only allow it to be default for single numbers, otherwise, the user should declare it.
+        try:
+            value = float(value)
+            der = float(der)
+        except:
+            raise TypeError('Value and derivative of ADnum object must be numeric.')
         #if type(value)!= int and type(value)!=float:
          #   raise TypeError('ADnum can only take numeric values.')
         #if type(der)!= int and type(der) !=float:

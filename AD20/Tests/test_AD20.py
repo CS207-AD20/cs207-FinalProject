@@ -9,13 +9,13 @@ def test_ADnum_init():
     assert x.val == 100
     assert x.der == -2
 
-#def test_ADnum_valtype():
- #   with pytest.raises(TypeError):
-  #      z = ADnum('zoo')
+def test_ADnum_valtype():
+    with pytest.raises(TypeError):
+        z = ADnum('zoo')
 
-#def test_ADnum_dertype():
- #   with pytest.raises(TypeError):
-  #      z = ADnum(3.0, 'zebra')
+def test_ADnum_dertype():
+    with pytest.raises(TypeError):
+        z = ADnum(3.0, 'zebra')
 
 def test_ADnum_mul():
     x = ADnum(3.0)
