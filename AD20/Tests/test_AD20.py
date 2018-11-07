@@ -20,3 +20,25 @@ def test_ADmath_tan():
     assert f.der == (1/np.cos(4))**2
 
 
+def test_ADnum_mul():
+    x = ADnum(3.0)
+    f = x*2.0
+    assert f.val == 6.0
+    assert f.der == 2.0
+
+def test_ADnum_rmul():
+    x = ADnum(3.0)
+    f = 2.0*x
+    assert f.val == 6.0
+    assert f.der == 2.0
+
+def test_ADnum_add():
+    x = ADnum(3.0)
+    f = x+2.0
+    assert f.val == 5.0
+    assert f.der == 1.0
+def test_ADnum_radd():
+    x = ADnum(3.0)
+    f = 2.0+x
+    assert f.val == 5.0
+    assert f.der == 1.0
