@@ -45,9 +45,9 @@ def test_ADnum_radd():
     assert f.der == 1.0
 
 def test_ADnum_sub():
-    x = ADnum(3.0)
+    x = ADnum(5.0)
     f = x-2.0
-    assert f.val == 1.0
+    assert f.val == 3.0
     assert f.der == 1.0
 
 def test_ADnum_rsub():
@@ -76,6 +76,6 @@ def test_ADnum_pow():
 
 def test_ADnum_rpow():
     x = ADnum(3.0)
-    f = np.e**x
-    assert f.val == np.exp(3.0)
-    assert f.der == np.exp(3.0)
+    f = 4**x
+    assert f.val == 64
+    assert f.der == 64*np.log(4.0)
