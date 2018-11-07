@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f138ad0c-2b18-430e-8e63-02a629964eb3" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AD20/AD20/ADnum.py" afterPath="$PROJECT_DIR$/AD20/AD20/ADnum.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AD20/Tests/test_AD20.py" afterPath="$PROJECT_DIR$/AD20/Tests/test_AD20.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,8 +31,8 @@
       <file leaf-file-name="test_AD20.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/AD20/Tests/test_AD20.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="80" column="31" lean-forward="false" selection-start-line="80" selection-start-column="31" selection-end-line="80" selection-end-column="31" />
+            <state relative-caret-position="255">
+              <caret line="75" column="0" lean-forward="true" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -42,8 +43,8 @@
       <file leaf-file-name="ADnum.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AD20/AD20/ADnum.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-570">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="225">
+              <caret line="39" column="42" lean-forward="false" selection-start-line="39" selection-start-column="42" selection-end-line="39" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -69,6 +70,7 @@
       <list>
         <option value="$PROJECT_DIR$/AD20/AD20/ADnum/ADnum.py" />
         <option value="$PROJECT_DIR$/AD20/AD20/ADmath/ADmath.py" />
+        <option value="$PROJECT_DIR$/AD20/AD20/ADnum.py" />
         <option value="$PROJECT_DIR$/AD20/Tests/test_AD20.py" />
       </list>
     </option>
@@ -553,16 +555,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/AD20/AD20/ADnum.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-570">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="225">
+          <caret line="39" column="42" lean-forward="false" selection-start-line="39" selection-start-column="42" selection-end-line="39" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AD20/Tests/test_AD20.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="80" column="31" lean-forward="false" selection-start-line="80" selection-start-column="31" selection-end-line="80" selection-end-column="31" />
+        <state relative-caret-position="255">
+          <caret line="75" column="0" lean-forward="true" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>

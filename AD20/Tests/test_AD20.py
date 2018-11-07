@@ -54,15 +54,15 @@ def test_ADnum_rsub():
     x = ADnum(3.0)
     f = 5.0-x
     assert f.val == 2.0
-    assert f.der == 1.0
+    assert f.der == -1.0
 
 def test_ADnum_div():
     x = ADnum(3.0)
     f = x/1.5
-    assert f.val == 2
-    assert f.der == 1.5
+    assert f.val == 2.0
+    assert f.der == 1/1.5
 
-def test_ADnum_rsub():
+def test_ADnum_rdiv():
     x = ADnum(3.0)
     f = 6/x
     assert f.val == 2.0

@@ -37,7 +37,7 @@ class ADnum:
         try:
             return ADnum(other.val-self.val, other.der-self.der)
         except AttributeError:
-            return ADnum(other-self.val, self.der)
+            return ADnum(other-self.val, -self.der)
 
     def __truediv__(self, other):
         try:
