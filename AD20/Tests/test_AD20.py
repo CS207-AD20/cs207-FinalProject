@@ -37,8 +37,45 @@ def test_ADnum_add():
     f = x+2.0
     assert f.val == 5.0
     assert f.der == 1.0
+
 def test_ADnum_radd():
     x = ADnum(3.0)
     f = 2.0+x
     assert f.val == 5.0
     assert f.der == 1.0
+
+def test_ADnum_sub():
+    x = ADnum(3.0)
+    f = x-2.0
+    assert f.val == 1.0
+    assert f.der == 1.0
+
+def test_ADnum_rsub():
+    x = ADnum(3.0)
+    f = 5.0-x
+    assert f.val == 2.0
+    assert f.der == 1.0
+
+def test_ADnum_div():
+    x = ADnum(3.0)
+    f = x/1.5
+    assert f.val == 2
+    assert f.der == 1.5
+
+def test_ADnum_rsub():
+    x = ADnum(3.0)
+    f = 6/x
+    assert f.val == 2.0
+    assert f.der == -2/3
+
+def test_ADnum_pow():
+    x = ADnum(3.0)
+    f = x**2.0
+    assert f.val == 9.0
+    assert f.der == 6.0
+
+def test_ADnum_rpow():
+    x = ADnum(3.0)
+    f = np.e**x
+    assert f.val == np.exp(3.0)
+    assert f.der == np.exp(3.0)
