@@ -20,3 +20,62 @@ def test_ADmath_tan():
     assert f.der == (1/np.cos(4))**2
 
 
+def test_ADnum_mul():
+    x = ADnum(3.0)
+    f = x*2.0
+    assert f.val == 6.0
+    assert f.der == 2.0
+
+def test_ADnum_rmul():
+    x = ADnum(3.0)
+    f = 2.0*x
+    assert f.val == 6.0
+    assert f.der == 2.0
+
+def test_ADnum_add():
+    x = ADnum(3.0)
+    f = x+2.0
+    assert f.val == 5.0
+    assert f.der == 1.0
+
+def test_ADnum_radd():
+    x = ADnum(3.0)
+    f = 2.0+x
+    assert f.val == 5.0
+    assert f.der == 1.0
+
+def test_ADnum_sub():
+    x = ADnum(5.0)
+    f = x-2.0
+    assert f.val == 3.0
+    assert f.der == 1.0
+
+def test_ADnum_rsub():
+    x = ADnum(3.0)
+    f = 5.0-x
+    assert f.val == 2.0
+    assert f.der == -1.0
+
+def test_ADnum_div():
+    x = ADnum(3.0)
+    f = x/1.5
+    assert f.val == 2.0
+    assert f.der == 1/1.5
+
+def test_ADnum_rdiv():
+    x = ADnum(3.0)
+    f = 6/x
+    assert f.val == 2.0
+    assert f.der == -2/3
+
+def test_ADnum_pow():
+    x = ADnum(3.0)
+    f = x**2.0
+    assert f.val == 9.0
+    assert f.der == 6.0
+
+def test_ADnum_rpow():
+    x = ADnum(3.0)
+    f = 4**x
+    assert f.val == 64
+    assert f.der == 64*np.log(4.0)
