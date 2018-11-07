@@ -5,7 +5,7 @@ This is the final project repository for Group 20:
 * Xinyue Wang
 * Kevin Yoon
 
-Testing Status Badges (note that as of Milestone1/HW4, no tests have been setup):
+Testing Status Badges:
 
 [![Build Status](https://travis-ci.org/CS207-AD20/cs207-FinalProject.svg?branch=master)](https://travis-ci.org/CS207-AD20/cs207-FinalProject.svg?branch=master)
 
