@@ -78,6 +78,7 @@ def test_ADnum_rpow():
     assert f.der == 64*np.log(4.0)
 
 # ADmath unit tests
+
 def test_ADmath_sin():
     X = ADnum(np.pi)
     Y = ADmath.sin(X)
@@ -149,73 +150,73 @@ def test_ADmath_log():
     assert f.val == np.log(72)
     assert f.der == 1/72
     
-def test_ADmath_sin():
+def test_ADmath_sinr():
     X = np.pi
     Y = ADmath.sin(X)
     assert Y.val == np.sin(np.pi)
     assert Y.der == 0
 
-def test_ADmath_cos():
+def test_ADmath_cosr():
     f = ADmath.cos(4)
     assert f.val == np.cos(4)
     assert f.der == 0
 
-def test_ADmath_tan():
+def test_ADmath_tanr():
     f = ADmath.tan(4)
     assert f.val == np.tan(4)
     assert f.der == 0
 
-def test_ADmath_csc():
+def test_ADmath_cscr():
     f = ADmath.csc(5)
     assert f.val == 1/np.sin(5)
     assert f.der == 0
 
-def test_ADmath_sec():
+def test_ADmath_secr():
     f = ADmath.sec(6)
     assert f.val == 1/np.cos(6)
     assert f.der == 0
 
-def test_ADmath_cot():
+def test_ADmath_cotr():
     f = ADmath.cot(1)
     assert f.val == 1/np.tan(1)
     assert f.der == 0
 
-def test_ADmath_arcsin():
+def test_ADmath_arcsinr():
     f = ADmath.arcsin(.2)
     assert f.val == np.arcsin(.2)
     assert f.der == 0
 
-def test_ADmath_arccos():
+def test_ADmath_arccosr():
     f = ADmath.arccos(.3)
     assert f.val == np.arccos(.3)
     assert f.der == 0
 
-def test_ADmath_arctan():
+def test_ADmath_arctanr():
     f = ADmath.arctan(1)
     assert f.val == np.arctan(1)
     assert f.der == 0
 
-def test_ADmath_sinh():
+def test_ADmath_sinhr():
     f = ADmath.sinh(2)
     assert f.val == np.sinh(2)
     assert f.der == 0
 
-def test_ADmath_cosh():
+def test_ADmath_coshr():
     f = ADmath.cosh(3)
     assert f.val == np.cosh(3)
     assert f.der == 0
 
-def test_ADmath_tanh():
+def test_ADmath_tanhr():
     f = ADmath.tanh(-5)
     assert f.val == np.tanh(-5)
     assert f.der == 0
 
-def test_ADmath_exp():
+def test_ADmath_expr():
     f = ADmath.exp(-3)
     assert f.val == np.exp(-3)
     assert f.der == 0
 
-def test_ADmath_log():
+def test_ADmath_logr():
     f = ADmath.log(72)
     assert f.val == np.log(72)
     assert f.der == 0
