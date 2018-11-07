@@ -6,7 +6,7 @@ class ADnum:
 
     def __mul__(self,other):
         try:
-            return ADnum(self.var*other.val, self.val*other.der+self.der*other.val)
+            return ADnum(self.val*other.val, self.val*other.der+self.der*other.val)
         except AttributeError:
             return ADnum(self.val*other, other*self.der)
 
