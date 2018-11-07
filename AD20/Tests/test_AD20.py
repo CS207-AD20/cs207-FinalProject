@@ -15,8 +15,8 @@ def test_ADmath_cos():
     assert f.der == -np.sin(4)
 
 def test_ADmath_tan():
-    f = ADmath.tan(ADnum(np.pi/2))
-    assert f.val == np.tan(np.pi/2)
-    assert f.der == (1/np.cos(np.pi/2))**2
+    f = ADmath.tan(ADnum(4))
+    assert f.val == np.tan(4)
+    assert f.der == (1/np.cos(4))**2
 
 
