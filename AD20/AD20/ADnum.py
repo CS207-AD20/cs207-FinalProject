@@ -1,6 +1,10 @@
 import numpy as np
 class ADnum:
     def __init__(self, value, der = 1): #this needs to be modified for multivar--For der default value, we only allow it to be default for single numbers, otherwise, the user should declare it.
+        if type(val)!= int and type(val)!=float:
+            raise TypeError('ADnum can only take numeric values.')
+        if type(der)!= int and type(der) !=float:
+            raise TypeError('Derivative of ADnum must be numberic.')
         self.val = value
         self.der = der
 
@@ -8,25 +12,31 @@ class ADnum:
         try:
             return ADnum(self.val*other.val, self.val*other.der+self.der*other.val)
         except AttributeError:
-            return ADnum(self.val*other, other*self.der)
+            other = ADnum(other, 0)
+            return self*other
+            #return ADnum(self.val*other, other*self.der)
 
     def __rmul__(self,other):
-        try:
-            return ADnum(self.val*other.val, self.val*other.der+self.der*other.val)
-        except AttributeError:
-            return ADnum(self.val*other, other*self.der)
+        return other*self
+        #try:
+            #return ADnum(self.val*other.val, self.val*other.der+self.der*other.val)
+        #except AttributeError:
+            #return ADnum(self.val*other, other*self.der)
 
     def __add__(self,other):
         try:
             return ADnum(self.val+other.val, self.der+other.der)
         except AttributeError:
-            return ADnum(self.val+other, self.der)
+            other = ADnum(other, 0)
+            return self + other
+            #return ADnum(self.val+other, self.der)
 
     def __radd__(self,other):
-        try:
-            return ADnum(self.val+other.val,self.der+other.der)
-        except AttributeError:
-            return ADnum(self.val+other, self.der)
+        return other + self
+        #try:
+         #   return ADnum(self.val+other.val,self.der+other.der)
+        #except AttributeError:
+         #   return ADnum(self.val+other, self.der)
 
     def __sub__(self,other):
         try:
