@@ -79,3 +79,35 @@ def test_ADnum_rpow():
     f = 4**x
     assert f.val == 64
     assert f.der == 64*np.log(4.0)
+
+def test_12x():
+    x = ADnum(1)
+    f = 1/(1-2*x)
+    assert f.val == 1/(1-2)
+    assert f.der == 2/(1-2)**2
+
+def test_xex():
+    x = ADnum(2)
+    f = x * ADmath.exp(x)
+    assert f.val == 2.0 * np.exp(2.0)
+    assert f.der == np.exp(2.0) + 2.0*np.exp(2.0)
+
+def test_5x2lnx():
+    x = ADnum(1)
+    f = 5 * x**2 * np.log(x)
+    assert f.val == 0.0
+    assert f.der == 10 * x * np.log(1.0) + 5*1.0
+
+def test_sinxcosx():
+    x = ADnum(0)
+    f = ADmath.sin(x) * ADmath.cos(x)
+    assert f.val == np.sin(0) * np.cos(0)
+    assert f.der == -(np.sin(0) ** 2) + np.cos(0) **2
+
+def test_2xe2x():
+    x = ADnum(2)
+    f = 2 * x * ADmath.exp(2*x)
+    assert f.val == 4 * np.exp(4)
+    assert f.der == 2 * np.exp(4.0) + 8 * np.exp(4)
+
+
