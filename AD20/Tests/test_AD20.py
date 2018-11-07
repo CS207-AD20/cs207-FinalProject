@@ -104,11 +104,11 @@ def test_ADmath_arcsin():
 def test_ADmath_arccos():
     f = ADmath.arccos(ADnum(.3))
     assert f.val == np.arccos(.3)
-    assert f.val == -1/(np.sqrt(1-.3**2))
+    assert f.der == -1/(np.sqrt(1-.3**2))
 
 def test_ADmath_arctan():
     f = ADmath.arctan(ADnum(1))
-    assert f.val == arctan(1)
+    assert f.val == np.arctan(1)
     assert f.der == .5
 
 def test_ADmath_sinh():
