@@ -49,7 +49,6 @@ class ADnum:
         except AttributeError:
             other = ADnum(other, 0)
             return self/other
-            #return ADnum(self.val/other,(1/other)*self.der)
     
     def __rtruediv__(self, other):
         try:
@@ -57,16 +56,14 @@ class ADnum:
         except AttributeError:
             other = ADnum(other, 0)
             return other/self
-            #return ADnum(other/self.val, other*self.__pow__(-1).der)
 
     def __pow__(self, other, modulo=None):
         try:
             return ADnum(self.val**other.val, other.val*(self.val**(other.val-1))*self.der+(self.val**other.val)*np.log(self.val)*other.der)
 
-        except AttributeError:# when other is constant
+        except AttributeError:
             other = ADnum(other, 0)
             return self**other
-            #return ADnum(self.val**other, other*(self.val**(other-1))*self.der)
 
     def __rpow__(self, other):
         try:
@@ -74,4 +71,3 @@ class ADnum:
         except AttributeError:
             other = ADnum(other, 0)
             return other**self
-            #return ADnum(other**self.val, (other**self.val)*np.log(other)*self.der)
