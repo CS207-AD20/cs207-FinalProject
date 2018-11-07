@@ -96,7 +96,8 @@ def test_5x2lnx():
     x = ADnum(1)
     f = 5 * x**2 * ADmath.log(x)
     assert f.val == 0.0
-    assert f.der == 10 * 1 * np.log(1.0) + 5*1.0
+    assert f.der == 10 * 1.0 * np.log(1.0) + 5*1.0
+
 
 def test_sinxcosx():
     x = ADnum(0)
