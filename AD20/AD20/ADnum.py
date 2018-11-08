@@ -19,9 +19,9 @@ class ADnum:
     >>> x = ADnum(2)
     >>> f = 2*x+3
     >>> print(f.val)
-    7
+    7.0
     >>> print(f.der)
-    2
+    2.0
     """
     def __init__(self, value, der = 1): #this needs to be modified for multivar--For der default value, we only allow it to be default for single numbers, otherwise, the user should declare it.
         try:
