@@ -3,6 +3,26 @@ Take value and specified derivative as given, wrap up as ADnum object, and retur
 """
 import numpy as np
 class ADnum:
+    """ Class to create ADnum objects on which to perform differentiation.
+
+    ATTRIBUTES
+    ==========
+    val : scalar for scalar valued quantities or numpy array for vector valued functions, the value of the ADnum object for a set input value
+    der: scalar for sclar functions of a single variable or numpy array for functions of multiple variables the derivative 
+    
+    METHODS
+    =======
+    This class overloads the methods for basic arithmetic operations.
+
+    EXAMPLES
+    ========
+    >>> x = ADnum(2)
+    >>> f = 2*x+3
+    >>> print(f.val)
+    7
+    >>> print(f.der)
+    2
+    """
     def __init__(self, value, der = 1): #this needs to be modified for multivar--For der default value, we only allow it to be default for single numbers, otherwise, the user should declare it.
         try:
             value = float(value)
@@ -62,7 +82,7 @@ class ADnum:
 
     def __pow__(self, other, modulo=None):
         try:
-            return ADnum(self.val**other.val, other.val*(self.val**(other.val-1))*self.der+(self.val**other.val)*np.log(self.val)*other.der)
+            return ADnum(self.val**other.val, other.val*(self.val**(other.val-1))*self.der+(self.val**other.val)*np.log(np.abs(self.val))*other.der)
 
         except AttributeError:
             other = ADnum(other, 0)
