@@ -1,3 +1,6 @@
+"""Module to wrap numbers into ADnum object and do basic calculations.
+Take value and specified derivative as given, wrap up as ADnum object, and return ADnum object for each basic calculation function.
+"""
 import numpy as np
 class ADnum:
     def __init__(self, value, der = 1): #this needs to be modified for multivar--For der default value, we only allow it to be default for single numbers, otherwise, the user should declare it.
