@@ -16,22 +16,31 @@ class ADnum:
 
     EXAMPLES
     ========
-    >>> x = ADnum(2)
-    >>> f = 2*x+3
-    >>> print(f.val)
-    7.0
-    >>> print(f.der)
-    2.0
+    #>>> x = ADnum(2)
+    #>>> f = 2*x+3
+    #>>> print(f.val)
+    #7.0
+    #>>> print(f.der)
+    #2.0
     """
-    def __init__(self, value, der = None, ins = 1, ind = 0):
+    def __init__(self, value, **kwargs):
         try:
             value = value.astype(float)
-            if der == None:
-                if ins>1:
+            if 'der' not in kwargs:
+                try:
+                    ins = kwargs['ins']
+                    ind = kwargs['ind']
                     der = np.zeros(len(ins)) #need to change to matrix if len(val) is not 1
                     der[ind] = 1.0
+                except:
+                    raise KeyError('Must provide ins and ind if der not provided.')
             else:
+                der = kwargs['der']
                 der = der.astype(float)
+                if 'ins' in kwargs:
+                    ins = kwargs['ins']
+                    if len(der) != ins:
+                        raise ValueError('Shape of derivative does not match number of inputs.')
         except:
             raise ValueError('Value and derivative of ADnum object must be numeric.')
         self.val = value
@@ -41,7 +50,7 @@ class ADnum:
         try:
             return ADnum(self.val*other.val, self.val*other.der+self.der*other.val)
         except AttributeError:
-            other = ADnum(other*np.ones(len(self.val)), np.zeros(len(self.der)))
+            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)))
             return self*other
 
     def __rmul__(self,other):
