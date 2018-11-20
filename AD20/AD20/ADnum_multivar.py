@@ -37,6 +37,7 @@ class ADnum:
                     raise KeyError('Must provide ins and ind if der not provided.')
             else:
                 der = kwargs['der']
+                der = np.array(der)
                 der = der.astype(float)
                 if 'ins' in kwargs:
                     ins = kwargs['ins']
