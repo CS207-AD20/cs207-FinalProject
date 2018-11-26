@@ -16,7 +16,7 @@ class ADnum:
 
     EXAMPLES
     ========
-    # >>> x = ADnum(2)
+    # >>> x = ADnum(2, der = 1)
     # >>> f = 2*x+3
     # >>> print(f.val)
     # 7.0
