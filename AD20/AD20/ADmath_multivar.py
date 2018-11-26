@@ -29,19 +29,19 @@ def csc(X):
     try:
         return ADnum(1/np.sin(X.val), der = (-1/np.tan(X.val))*(1/np.sin(X.val))*X.der)
     except:
-        return 1/np.sin(X.val)
+        return 1/np.sin(X)
 
 def sec(X):
     try:
         return ADnum(1/np.cos(X.val), der = np.tan(X.val)/np.cos(X.val)*X.der)
     except AttributeError:
-        return 1/np.cos(X.val)
+        return 1/np.cos(X)
 
 def cot(X):
     try:
         return ADnum(1/np.tan(X.val), der = -1/(np.sin(X.val)**2)*X.der)
     except AttributeError:
-        return 1/np.tan(X.val)
+        return 1/np.tan(X)
 
 #INVERSE TRIGONOMETRIC FUNCTIONS
 def arcsin(X):
