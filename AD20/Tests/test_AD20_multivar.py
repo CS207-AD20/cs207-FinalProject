@@ -12,11 +12,11 @@ def test_ADnum_init():
 
 def test_ADnum_valtype():
     with pytest.raises(TypeError):
-        z = ADnum('zoo')
+        z = ADnum('zoo', der = 1)
 
 def test_ADnum_dertype():
     with pytest.raises(TypeError):
-        z = ADnum(3.0, 'zebra')
+        z = ADnum(3.0, der = 'zebra')
 
 def test_ADnum_mul():
     x = ADnum(3.0, der = 1)
