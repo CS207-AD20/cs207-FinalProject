@@ -38,8 +38,8 @@ res = value0.get()
 # value1 = tk.Entry(top, bd = 5)
 
 
-ask_numbers.grid(row = 0, column =0)
-value0.grid(row =0, column = 1)
+# ask_numbers.grid(row = 0, column =0)
+# value0.grid(row =0, column = 1)
 
 # ask_value.grid(row =1, column = 0)
 # value1.grid(row =1, column =1)
