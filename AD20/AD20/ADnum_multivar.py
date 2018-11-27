@@ -16,12 +16,12 @@ class ADnum:
 
     EXAMPLES
     ========
-    #>>> x = ADnum(2)
-    #>>> f = 2*x+3
-    #>>> print(f.val)
-    #7.0
-    #>>> print(f.der)
-    #2.0
+    # >>> x = ADnum(2, der = 1)
+    # >>> f = 2*x+3
+    # >>> print(f.val)
+    # 7.0
+    # >>> print(f.der)
+    # 2.0
     """
     def __init__(self, value, **kwargs):
         try:
