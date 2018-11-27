@@ -1,5 +1,6 @@
 """Module for performing special functions on ADnum objects.
 Take an ADnum object as input and return an ADnum object as output.
+For real number inputs, returns a real number.
 """
 import AD20
 import numpy as np
@@ -94,6 +95,8 @@ def log(X):
     except AttributeError:
         return np.log(X)
 
-
-
-
+def sqrt(X):
+    try:
+        return ADnum(np.sqrt(X.val), der = X.der/(np.sqrt(X.val)))
+    except AttributeError:
+        return np.sqrt(X)

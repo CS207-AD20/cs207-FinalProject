@@ -1,7 +1,7 @@
 
 # import PIL.Image
 # import PIL.ImageTk
-import Tkinter as tk
+import tkinter as tk
 
 
 import tkMessageBox
