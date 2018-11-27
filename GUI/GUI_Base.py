@@ -4,7 +4,7 @@
 import tkinter as tk
 
 
-import tkMessageBox
+import tkinter.messagebox as tkMessageBox
 top = tk.Tk()
 
 def startEngine():
