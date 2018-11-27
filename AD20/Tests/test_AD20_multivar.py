@@ -246,4 +246,4 @@ def test_multivar():
     y = ADnum(4, ins = 2, ind= 1)
     f = 2 * y + 2*x**2
     assert f.val == 2 * 4 + 2 * 3**2
-    assert f.der == np.array(12, 2)
+    assert f.der == np.array([12, 2])
