@@ -97,6 +97,6 @@ def log(X):
 
 def sqrt(X):
     try:
-        return ADnum(np.sqrt(X.val), der = X.der/(np.sqrt(X.val)))
+        return ADnum(np.sqrt(X.val), der = X.der/(2*np.sqrt(X.val)))
     except AttributeError:
         return np.sqrt(X)
