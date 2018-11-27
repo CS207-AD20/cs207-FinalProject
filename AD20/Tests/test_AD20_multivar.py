@@ -19,16 +19,16 @@ def test_ADnum_dertype():
         z = ADnum(3.0, der = 'zebra')
 
 def test_ADnum_nodernoins():
-    with pytest.raises(KeyError):
+    with pytest.raises(Exception):
         z = ADnum(4, ind = 0)
 
 
 def test_ADnum_nodernoind():
-    with pytest.raises(KeyError):
+    with pytest.raises(Exception):
         z = ADnum(4, ins = 3)
 
 def test_ADnum_nodernothing():
-    with pytest.raises(KeyError):
+    with pytest.raises(Exception):
         z = ADnum(3)
 
 def test_ADnum_derconsistent():
