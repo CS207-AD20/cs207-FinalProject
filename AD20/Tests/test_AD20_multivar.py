@@ -18,6 +18,23 @@ def test_ADnum_dertype():
     with pytest.raises(ValueError):
         z = ADnum(3.0, der = 'zebra')
 
+def test_ADnum_nodernoins():
+    with pytest.raises(KeyError):
+        z = ADnum(4, ind = 0)
+
+
+def test_ADnum_nodernoind():
+    with pytest.raises(KeyError):
+        z = ADnum(4, ins = 3)
+
+def test_ADnum_nodernothing():
+    with pytest.raises(KeyError):
+        z = ADnum(3)
+
+def test_ADnum_derconsistent():
+    with pytest.raises(ValueError):
+        z = ADnum(3, der = np.array([1, 3]), ins = 5)
+
 def test_ADnum_mul():
     x = ADnum(3.0, der = 1)
     f = x*2.0
@@ -151,6 +168,11 @@ def test_ADmath_log():
     assert f.val == np.log(72)
     assert f.der == 1/72
 
+def test_ADmath_sqrt():
+    f = ADmath.sqrt(ADnum(40, der = 1))
+    assert f.val == np.sqrt(40)
+    assert f.der == 1/(2*np.sqrt(40))
+
 def test_ADmath_sinr():
     X = np.pi
     Y = ADmath.sin(X)
@@ -208,6 +230,10 @@ def test_ADmath_expr():
 def test_ADmath_logr():
     f = ADmath.log(72)
     assert f == np.log(72)
+
+def test_ADmath_sqrtr():
+    f = ADmath.sqrt(40)
+    assert f == np.sqrt(40)
 
 # More advanced tests
 def test_12x():
