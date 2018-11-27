@@ -241,4 +241,9 @@ def test_2xe2x():
     assert f.val == 4 * np.exp(4)
     assert f.der == 2 * np.exp(4.0) + 8 * np.exp(4)
 
-
+def test_multivar():
+    x = ADnum(3, ins = 2, ind = 0) 
+    y = ADnum(4, ins = 2, ind= 1)
+    f = 2 * y + 2*x**2
+    assert f.val == 2 * 4 + 2 * 3**2
+    assert f.der == np.array(12, 2)
