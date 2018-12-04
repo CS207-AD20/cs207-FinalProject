@@ -3,10 +3,10 @@
 # import PIL.ImageTk
 
 
-# import AD20
-# import numpy as np
-# from AD20.ADnum_multivar import ADnum
-# from AD20 import ADmath_multivar as ADmath
+import AD20
+import numpy as np
+from AD20.ADnum_multivar import ADnum
+from AD20 import ADmath_multivar as ADmath
 
 
 import tkinter as tk
@@ -66,7 +66,7 @@ def get_value():
     message = "You are going to use {} numbers.".format(val)
     messagebox.showinfo("Welcome to AutoDiff Education Mode", message)
 def calc():
-    x = ADnum(2.0)
+
     messagebox.showinfo("This is a function", "X + X is 2X")
 # try more buttons:
 frame = tk.Frame(top)
