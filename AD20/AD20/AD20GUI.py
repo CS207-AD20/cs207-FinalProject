@@ -1,13 +1,12 @@
 import numpy as np
-import ADnum_multivar
-from ADnum_multivar import ADnum
-import ADmath_multivar as ADmath
-import ADgraph
+from AD20.ADnum_multivar import ADnum
+import AD20.ADmath_multivar as ADmath
+import AD20.ADgraph
 
 
 import math
 import matplotlib
-# matplotlib.use('TkAgg')
+matplotlib.use('Agg')
 
 import tkinter as tk
 from tkinter import messagebox
