@@ -22,12 +22,14 @@ def gen_graph(y):
     return G
 
 def draw_graph(y):
+    fig = plt.figure()
     G = gen_graph(y)
     edge_labs = nx.get_edge_attributes(G, 'label')
     pos = nx.spring_layout(G)
     nx.draw_networkx(G, pos, with_labels = False)
     nx.draw_networkx_edge_labels(G, pos, edge_labels = edge_labs)
     limits = plt.axis('off')
+    return fig
 
 def plot_ADnum(x, xmin = -10, xmax = 10):
     vals = np.linspace(xmin, xmax, 100)
