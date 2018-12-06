@@ -2,6 +2,7 @@
 Take value and specified derivative as given, wrap up as ADnum object, and return ADnum object for each basic calculation function.
 """
 import numpy as np
+from AD20.ADgraph import merge_dicts
 class ADnum:
     """ Class to create ADnum objects on which to perform differentiation.
 
@@ -27,6 +28,10 @@ class ADnum:
         try:
             value = np.array(value)
             value = value.astype(float)
+            if 'graph' not in kwargs:
+                self.graph = {}
+            else:
+                self.graph = kwargs['graph']
             if 'der' not in kwargs:
                 try:
                     ins = kwargs['ins']
@@ -54,7 +59,16 @@ class ADnum:
 
     def __mul__(self,other):
         try:
-            return ADnum(self.val*other.val, der = self.val*other.der+self.der*other.val)
+            graph = merge_dicts(self.graph, other.graph)
+            y = ADnum(self.val*other.val, der = self.val*other.der+self.der*other.val)
+            y.graph = graph
+            if self not in y.graph:
+                y.graph[self] = []
+            y.graph[self].append((y, 'multiply'))
+            if other not in y.graph:
+                y.graph[other] = []
+            y.graph[other].append((y, 'multiply'))
+            return y
         except AttributeError:
             other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)))
             return self*other
