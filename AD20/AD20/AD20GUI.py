@@ -1,8 +1,8 @@
-import AD20
 import numpy as np
-from AD20.ADnum_multivar import ADnum
-from AD20 import ADmath_multivar as ADmath
-from AD20 import ADgraph
+import ADnum_multivar
+from ADnum_multivar import ADnum
+import ADmath_multivar as ADmath
+import ADgraph
 
 
 import math
