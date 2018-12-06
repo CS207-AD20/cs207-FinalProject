@@ -1,5 +1,3 @@
-# %cd ..
-# %cd AD20
 import AD20
 import numpy as np
 from AD20.ADnum_multivar import ADnum
@@ -8,11 +6,13 @@ from AD20 import ADgraph
 
 
 import math
+import matplotlib
+# matplotlib.use('TkAgg')
 
 import tkinter as tk
 from tkinter import messagebox
 import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk,NavigationToolbar2TkAgg
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
 #function_expression = ""#Although looks a little bit redundant, but we have to keep this one since we should not show ADnum on cursor
 master = tk.Tk()
