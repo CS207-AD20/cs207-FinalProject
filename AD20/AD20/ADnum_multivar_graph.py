@@ -2,7 +2,7 @@
 Take value and specified derivative as given, wrap up as ADnum object, and return ADnum object for each basic calculation function.
 """
 import numpy as np
-from ADgraph import merge_dicts
+from AD20.ADgraph import merge_dicts
 class ADnum:
     """ Class to create ADnum objects on which to perform differentiation.
 
