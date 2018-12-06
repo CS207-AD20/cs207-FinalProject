@@ -78,7 +78,16 @@ class ADnum:
 
     def __add__(self,other):
         try:
-            return ADnum(self.val+other.val, der = self.der+other.der)
+            graph = merge_dicts(self.graph, other.graph)
+            y = ADnum(self.val+other.val, der = self.der+other.der)
+            y.graph = graph
+            if self not in y.graph:
+                y.graph[self] = []
+            y.graph[self].append((y, 'add'))
+            if other not in y.graph:
+                y.graph[other] = []
+            y.graph[other].append((y, 'add'))
+            return y        
         except AttributeError:
             other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)))
             return self + other
@@ -88,7 +97,16 @@ class ADnum:
 
     def __sub__(self,other):
         try:
-            return ADnum(self.val-other.val,der = self.der-other.der)
+            graph = merge_dicts(self.graph, other.graph)
+            y = ADnum(self.val-other.val,der = self.der-other.der)
+            y.graph = graph
+            if self not in y.graph:
+                y.graph[self] = []
+            y.graph[self].append((y, 'subtract'))
+            if other not in y.graph:
+                y.graph[other] = []
+            y.graph[other].append((y, 'subtract'))
+            return y
         except AttributeError:
             other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)))
             return self-other
@@ -102,7 +120,16 @@ class ADnum:
 
     def __truediv__(self, other):
         try:
-            return ADnum(self.val/other.val, der = (other.val*self.der-self.val*other.der)/(other.val**2))
+            graph = merge_dicts(self.graph, other.graph)
+            y = ADnum(self.val/other.val, der = (other.val*self.der-self.val*other.der)/(other.val**2))
+            y.graph = graph
+            if self not in y.graph:
+                y.graph[self] = []
+            y.graph[self].append((y, 'divide'))
+            if other not in y.graph:
+                y.graph[other] = []
+            y.graph[other].append((y, 'divide'))
+            return y
         except AttributeError:
             other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)))
             return self/other
@@ -116,8 +143,16 @@ class ADnum:
 
     def __pow__(self, other, modulo=None):
         try:
-            return ADnum(self.val**other.val, der = other.val*(self.val**(other.val-1))*self.der+(self.val**other.val)*np.log(np.abs(self.val))*other.der)
-
+            graph = merge_dicts(self.graph, other.graph)
+            y = ADnum(self.val**other.val, der = other.val*(self.val**(other.val-1))*self.der+(self.val**other.val)*np.log(np.abs(self.val))*other.der)
+            y.graph = graph
+            if self not in y.graph:
+                y.graph[self] = []
+            y.graph[self].append((y, 'pow'))
+            if other not in y.graph:
+                y.graph[other] = []
+            y.graph[other].append((y, 'pow'))
+            return y
         except AttributeError:
             other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)))
             return self**other
