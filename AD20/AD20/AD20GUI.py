@@ -1,4 +1,5 @@
 import numpy as np
+import ADnum_multivar
 from ADnum_multivar import ADnum
 import ADmath_multivar as ADmath
 import ADgraph
@@ -6,7 +7,7 @@ import ADgraph
 
 import math
 import matplotlib
-matplotlib.use('Agg')
+# matplotlib.use('TkAgg')
 
 import tkinter as tk
 from tkinter import messagebox
@@ -288,6 +289,6 @@ show_func = tk.Label(cal_frame, textvariable = func_content,height=5, width=20,b
 
 
 #=====End of configuration========
-# if __name__=='main':
-#     master.resizable(width=True, height=True)
-#     master.mainloop()
+if __name__=='main':
+    master.resizable(width=True, height=True)
+    master.mainloop()
