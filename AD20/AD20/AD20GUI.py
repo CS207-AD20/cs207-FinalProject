@@ -6,7 +6,7 @@ import AD20.ADgraph
 
 import math
 import matplotlib
-# matplotlib.use('TkAgg')
+matplotlib.use('Agg')
 
 import tkinter as tk
 from tkinter import messagebox
