@@ -33,9 +33,11 @@ def plot_ADnum(x, xmin = -10, xmax = 10):
     vals = np.linspace(xmin, xmax, 100)
     evals = [x(value).val for value in vals]
     ders = [x(value).der for value in vals]
+    fig = plt.figure()
     plt.plot(vals, evals, label = 'f')
     plt.plot(vals, ders, label = 'df/dx')
     plt.legend()
+    return fig
 
 #def gen_compgraph(d):
  #   G = nx.DiGraph()
