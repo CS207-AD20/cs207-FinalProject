@@ -3,7 +3,7 @@ Take an ADnum object as input and return an ADnum object as output.
 For real number inputs, returns a real number.
 """
 import numpy as np
-from AD20.ADnum_multivar import ADnum
+from AD20.ADnum_multivar_graph import ADnum
 
 
 #TRIGONOMETRIC FUNCTIONS

@@ -78,7 +78,7 @@ class ADnum:
             y.graph[other].append((y, 'multiply'))
             return y
         except AttributeError:
-            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)))
+            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)), constant = 1)
             return self*other
 
     def __rmul__(self,other):
