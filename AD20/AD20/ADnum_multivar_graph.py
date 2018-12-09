@@ -36,8 +36,11 @@ class ADnum:
                 try:
                     ins = kwargs['ins']
                     ind = kwargs['ind']
-                    der = np.zeros(ins) #need to change to matrix if len(val) is not 1
-                    der[ind] = 1.0
+                    if ins>1:
+                        der = np.zeros((ins, len(value)))
+                        der[ind, :] = 1.0 #np.ones(len(value))
+                    else:
+                        der = np.ones(len(value))
                 except:
                     raise KeyError('Must provide ins and ind if der not provided.')
             else:
