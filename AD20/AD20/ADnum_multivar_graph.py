@@ -171,3 +171,9 @@ class ADnum:
         except AttributeError:
             other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)), constant = 1)
             return other**self
+
+    #def __eq__(self, other):
+     #   return (self.val == other.val) and (self.der == other.der) and (self.graph == other.graph)
+
+    #def __neq__(self, other):
+     #   return (not self == other)

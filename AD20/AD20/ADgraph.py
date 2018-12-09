@@ -1,6 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 
 def merge_dicts(d1, d2):
     dnew = d1.copy()
@@ -41,7 +42,7 @@ def get_labels(y):
         node = nodes.pop()
         if node not in new_names:
             if node.constant:
-                new_names[node] = str(node.val)
+                new_names[node] = str(np.round(node.val, decimals=1))
             else:
                 new_names[node] = 'x' + str(total)
                 total = total - 1
@@ -51,27 +52,70 @@ def get_labels(y):
                     nodes.append(neighbor[0])
     return new_names
 
-def get_colors(G):
+def get_colors(G, y, labs):
     colors = []
     for node in G:
         if node.constant:
             colors.append('blue')
         else:
-            colors.append('red')
+            if node == y:
+                colors.append('green')
+            else:
+                if labs[node] == 'x0':
+                    colors.append('magenta')
+                else:
+                    colors.append('red')
     return colors
 
-
+def get_sizes(G, y, labs):
+    sizes = []
+    for node in G:
+        label = labs[node]
+        sizes.append(len(label)*200)
+    return sizes
 
 def draw_graph(y):
     fig = plt.figure()
     G = gen_graph(y)
     edge_labs = nx.get_edge_attributes(G, 'label')
     pos = nx.spring_layout(G)
-    nx.draw_networkx(G, pos, labels = get_labels(y), node_color = get_colors(G))
+    labs = get_labels(y)
+    nx.draw_networkx(G, pos, labels = labs, node_color = get_colors(G, y, labs), node_size = get_sizes(G, y, labs), font_color= 'white')
     nx.draw_networkx_edge_labels(G, pos, edge_labels = edge_labs)
     limits = plt.axis('off')
     plt.show()
     return fig
+
+def gen_table(y):
+    parents = reverse_graph(y)
+    labs = get_labels(y)
+    visited = []
+    data = {}
+    data['Trace'] = []
+    data['Elementary Operation']=[]
+    data['Value']= []
+    data['Derivative']=[]
+    nodes = [y]
+    while len(nodes)>0:
+        node = nodes.pop()
+        if node not in visited:
+            if node.constant:
+                visited.append(node)
+            else:
+                visited.append(node)
+                data['Trace'].append(labs[node])
+                data['Value'].append(node.val)
+                data['Derivative'].append(node.der)
+                if node in parents:
+                    link = parents[node][0][1]
+                    neighbors = parents[node]
+                    for neighbor in neighbors:
+                        nodes.append(neighbor[0])
+                else:
+                    link = 'input'
+                data['Elementary Operation'].append(link)
+
+    return pd.DataFrame.from_dict(data)
 
 def plot_ADnum(x, xmin = -10, xmax = 10):
     '''Function to plot f and its derivative for single variable input'''
