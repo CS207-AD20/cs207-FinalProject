@@ -26,21 +26,22 @@ class ADnum:
     """
     def __init__(self, value, **kwargs):
         try:
+            scalarinput = (isinstance(value, int) or isinstance(value, float))
             value = np.array(value)
             value = value.astype(float)
-            if 'graph' not in kwargs:
-                self.graph = {}
-            else:
-                self.graph = kwargs['graph']
             if 'der' not in kwargs:
                 try:
                     ins = kwargs['ins']
                     ind = kwargs['ind']
-                    if ins>1:
-                        der = np.zeros((ins, len(value)))
-                        der[ind, :] = 1.0 #np.ones(len(value))
+                    if scalarinput:
+                        der = np.zeros(ins)
+                        der[ind] = 1.0
                     else:
-                        der = np.ones(len(value))
+                        if ins>1:
+                            der = np.zeros((ins, len(value)))
+                            der[ind, :] = 1.0 #np.ones(len(value))
+                        else:
+                            der = np.ones(len(value))
                 except:
                     raise KeyError('Must provide ins and ind if der not provided.')
             else:
@@ -59,6 +60,10 @@ class ADnum:
             self.graph = {}
         else:
             self.graph = kwargs['graph']
+        if 'constant' not in kwargs:
+            self.constant = 0
+        else:
+            self.constant = kwargs['constant']
 
     def __mul__(self,other):
         try:
@@ -92,7 +97,7 @@ class ADnum:
             y.graph[other].append((y, 'add'))
             return y        
         except AttributeError:
-            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)))
+            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)), constant = 1)
             return self + other
 
     def __radd__(self,other):
@@ -111,14 +116,14 @@ class ADnum:
             y.graph[other].append((y, 'subtract'))
             return y
         except AttributeError:
-            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)))
+            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)), constant = 1)
             return self-other
 
     def __rsub__(self, other):
         try:
             return ADnum(other.val-self.val, der = other.der-self.der)
         except AttributeError:
-            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)))
+            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)), constant = 1)
             return other-self
 
     def __truediv__(self, other):
@@ -134,14 +139,14 @@ class ADnum:
             y.graph[other].append((y, 'divide'))
             return y
         except AttributeError:
-            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)))
+            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)), constant = 1)
             return self/other
     
     def __rtruediv__(self, other):
         try:
             return ADnum(other.val/self.val, der = (self.val*other.der-other.val*self.der)/(self.val**2))
         except AttributeError:
-            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)))
+            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)), constant = 1)
             return other/self
 
     def __pow__(self, other, modulo=None):
@@ -157,12 +162,12 @@ class ADnum:
             y.graph[other].append((y, 'pow'))
             return y
         except AttributeError:
-            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)))
+            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)), constant = 1)
             return self**other
 
     def __rpow__(self, other):
         try:
             return ADnum(other.val**self.val, der = self.val*(other.val**(self.val-1))*other.der+(other.val**self.val)*np.log(other.val)*self.der)
         except AttributeError:
-            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)))
+            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)), constant = 1)
             return other**self

@@ -33,6 +33,7 @@ def draw_graph(y):
     nx.draw_networkx(G, pos, with_labels = False)
     nx.draw_networkx_edge_labels(G, pos, edge_labels = edge_labs)
     limits = plt.axis('off')
+    plt.show()
     return fig
 
 def plot_ADnum(x, xmin = -10, xmax = 10):
