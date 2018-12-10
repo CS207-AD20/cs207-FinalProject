@@ -41,7 +41,7 @@ def test_ADnum_mul():
     f = x*2.0
     assert f.val == 6.0
     assert f.der == 2.0
-    assert len(f.graph) = 2
+    assert len(f.graph) == 2
 
 def test_ADnum_rmul():
     x = ADnum(3.0, der = 1)
