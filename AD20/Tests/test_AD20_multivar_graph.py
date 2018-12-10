@@ -36,6 +36,10 @@ def test_ADnum_derconsistent():
     with pytest.raises(ValueError):
         z = ADnum(3, der = np.array([1, 3]), ins = 5)
 
+def test_graphiput():
+    z = ADnum(1, der = 1, graph = {'a': 1})
+    assert z.graph == {'a':1}
+
 def test_ADnum_mul():
     x = ADnum(3.0, der = 1)
     f = x*2.0
@@ -299,3 +303,8 @@ def test_multivar():
     f = 2 * y + 2*x**2
     assert f.val == 2 * 4 + 2 * 3**2
     assert f.der.all() == np.all(np.array([12, 2]))
+
+def test_vecinput():
+    x = ADnum([1, 2, 3], ins = 1, ind = 0)
+    assert x.val == np.array([1., 2., 3.])
+    assert x.der == np.array([1., 1., 1.])
