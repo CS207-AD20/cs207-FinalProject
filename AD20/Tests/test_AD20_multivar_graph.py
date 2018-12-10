@@ -9,6 +9,7 @@ def test_ADnum_init():
     x = ADnum(100, der = -2)
     assert x.val == 100
     assert x.der == -2
+    assert len(x.graph)==0
 
 def test_ADnum_valtype():
     with pytest.raises(ValueError):
@@ -40,6 +41,7 @@ def test_ADnum_mul():
     f = x*2.0
     assert f.val == 6.0
     assert f.der == 2.0
+    assert len(f.graph) = 2
 
 def test_ADnum_rmul():
     x = ADnum(3.0, der = 1)
