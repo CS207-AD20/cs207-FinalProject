@@ -306,5 +306,5 @@ def test_multivar():
 
 def test_vecinput():
     x = ADnum([1, 2, 3], ins = 1, ind = 0)
-    assert x.val == np.array([1., 2., 3.])
-    assert x.der == np.array([1., 1., 1.])
+    assert np.array_equal(x.val, np.array([1., 2., 3.]))
+    assert np.array_equal(x.der, np.array([1., 1., 1.]))
