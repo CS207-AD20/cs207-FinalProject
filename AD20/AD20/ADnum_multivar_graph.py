@@ -2,7 +2,7 @@
 Take value and specified derivative as given, wrap up as ADnum object, and return ADnum object for each basic calculation function.
 """
 import numpy as np
-from AD20.ADgraph import merge_dicts
+#from AD20.ADgraph import merge_dicts
 class ADnum:
     """ Class to create ADnum objects on which to perform differentiation.
 
@@ -172,6 +172,14 @@ class ADnum:
             other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)), constant = 1)
             return other**self
 
+def merge_dicts(d1, d2):
+    dnew = d1.copy()
+    for key in d2:
+        if key in dnew:
+            dnew[key] = dnew[key]+d2[key]
+        else:
+            dnew[key] = d2[key]
+    return dnew
     #def __eq__(self, other):
      #   return (self.val == other.val) and (self.der == other.der) and (self.graph == other.graph)
 
