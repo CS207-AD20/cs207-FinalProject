@@ -113,7 +113,7 @@ def test_ADmath_sin():
     Y = ADmath.sin(X)
     assert Y.val == np.sin(np.pi)
     assert Y.der == np.cos(np.pi)
-    assert len(f.graph) == 1
+    assert len(Y.graph) == 1
 
 def test_ADmath_cos():
     f = ADmath.cos(ADnum(4, der = 1))
@@ -203,78 +203,63 @@ def test_ADmath_sinr():
     X = np.pi
     Y = ADmath.sin(X)
     assert Y == np.sin(np.pi)
-    assert len(f.graph) == 1
 
 
 def test_ADmath_cosr():
     f = ADmath.cos(4)
     assert f == np.cos(4)
-    assert len(f.graph) == 1
 
 def test_ADmath_tanr():
     f = ADmath.tan(4)
     assert f == np.tan(4)
-    assert len(f.graph) == 1
 
 def test_ADmath_cscr():
     f = ADmath.csc(5)
     assert f == 1/np.sin(5)
-    assert len(f.graph) == 1
 
 def test_ADmath_secr():
     f = ADmath.sec(6)
     assert f == 1/np.cos(6)
-    assert len(f.graph) == 1
 
 def test_ADmath_cotr():
     f = ADmath.cot(1)
     assert f == 1/np.tan(1)
-    assert len(f.graph) == 1
 
 def test_ADmath_arcsinr():
     f = ADmath.arcsin(.2)
     assert f == np.arcsin(.2)
-    assert len(f.graph) == 1
 
 def test_ADmath_arccosr():
     f = ADmath.arccos(.3)
     assert f == np.arccos(.3)
-    assert len(f.graph) == 1
 
 def test_ADmath_arctanr():
     f = ADmath.arctan(1)
     assert f == np.arctan(1)
-    assert len(f.graph) == 1
 
 def test_ADmath_sinhr():
     f = ADmath.sinh(2)
     assert f == np.sinh(2)
-    assert len(f.graph) == 1
 
 def test_ADmath_coshr():
     f = ADmath.cosh(3)
     assert f == np.cosh(3)
-    assert len(f.graph) == 1
 
 def test_ADmath_tanhr():
     f = ADmath.tanh(-5)
     assert f == np.tanh(-5)
-    assert len(f.graph) == 1
 
 def test_ADmath_expr():
     f = ADmath.exp(-3)
     assert f == np.exp(-3)
-    assert len(f.graph) == 1
 
 def test_ADmath_logr():
     f = ADmath.log(72)
     assert f == np.log(72)
-    assert len(f.graph) == 1
 
 def test_ADmath_sqrtr():
     f = ADmath.sqrt(40)
     assert f == np.sqrt(40)
-    assert len(f.graph) == 1
 
 # More advanced tests
 def test_12x():
