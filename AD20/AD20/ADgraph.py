@@ -44,7 +44,7 @@ def get_labels(y):
             if node.constant:
                 new_names[node] = str(np.round(node.val, decimals=1))
             else:
-                new_names[node] = 'x' + str(total)
+                new_names[node] = 'X' + str(total)
                 total = total - 1
             if node in parents:
                 neighbors = parents[node]
@@ -61,7 +61,7 @@ def get_colors(G, y, labs):
             if node == y:
                 colors.append('green')
             else:
-                if labs[node] == 'x0':
+                if labs[node] == 'X0':
                     colors.append('magenta')
                 else:
                     colors.append('red')
@@ -120,8 +120,8 @@ def gen_table(y):
 def plot_ADnum(x, xmin = -10, xmax = 10):
     '''Function to plot f and its derivative for single variable input'''
     vals = np.linspace(xmin, xmax, 100)
-    evals = [x(value).val for value in vals]
-    ders = [x(value).der for value in vals]
+    evals = [x(ADnum(value, der=1)).val for value in vals]
+    ders = [x(ADnum(value, der=1)).der for value in vals]
     fig = plt.figure()
     plt.plot(vals, evals, label = 'f', linewidth = 2)
     plt.plot(vals, ders, label = 'df/dx', linewidth = 2)
