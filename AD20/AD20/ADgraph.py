@@ -2,7 +2,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from ADnum_multivar_graph import ADnum
+from AD20.ADnum_multivar_graph import ADnum
 
 def merge_dicts(d1, d2):
     dnew = d1.copy()
