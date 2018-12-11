@@ -348,7 +348,7 @@ def test_get_colorsandsizes():
     Y = ADmath.sin(X)+3
     labs = ADgraph.get_labels(Y)
     G = ADgraph.gen_graph(Y)
-    cols = ADgraph.get_colors(G, Y, labs)
+    cols = ADgraph.get_colors(G, Y)
     sizes = ADgraph.get_sizes(G, Y, labs)
     assert len(cols)== 4
     assert len(sizes) == 4
