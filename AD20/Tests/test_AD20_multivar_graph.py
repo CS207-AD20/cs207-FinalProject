@@ -340,26 +340,27 @@ def test_get_colorsandsizes():
     G = ADgraph.gen_graph(Y)
     cols = ADgraph.get_colors(G, Y, labs)
     sizes = ADgraph.get_sizes(G, Y, labs)
-    assert len(cols)==3
-    assert len(sizes) ==3
+    assert len(cols)==4
+    assert len(sizes) ==4
     assert cols[X] == 'magenta'
     assert cols[Y] == 'green'
 
-def test_gen_graph():
+def test_draw_graph():
     X = ADnum(1, der =1)
     Y = ADmath.sin(X)+3
     fig = ADgraph.draw_graph(Y)
-    assert type(fig) == Figure
+    assert type(fig) == matplotlib.figure.Figure
 
 def test_gen_table():
     X = ADnum(1, der =1)
     Y = ADmath.sin(X)+3
     dat = ADgraph.gen_table(Y)
+    assert type(dat) == pandas.core.frame.DataFrame
     
 
 def test_plot_ADnum():
     X = ADnum(1, der =1)
     Y = ADmath.sin(X)+3
     fig = ADgraph.plot_ADnum(Y)
-    assert type(fig)==Figure
+    assert type(fig)==matplotlib.figure.Figure
     
