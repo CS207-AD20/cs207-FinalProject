@@ -164,7 +164,7 @@ def log(X):
         return np.log(X)
 
 def logistic(X):
-    return 1/(1+exp(-X))
+    return 1/(1+exp(-1*X))
 
 
 def sqrt(X):
