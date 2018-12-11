@@ -16,37 +16,87 @@ class ADnum:
 
     EXAMPLES
     ========
-    >>> x = ADnum(2)
-    >>> f = 2*x+3
-    >>> print(f.val)
-    7.0
-    >>> print(f.der)
-    2.0
+    # >>> x = ADnum(2, der = 1)
+    # >>> f = 2*x+3
+    # >>> print(f.val)
+    # 7.0
+    # >>> print(f.der)
+    # 2.0
     """
-    def __init__(self, value, der = 1): #this needs to be modified for multivar--For der default value, we only allow it to be default for single numbers, otherwise, the user should declare it.
+    def __init__(self, value, **kwargs):
         try:
-            value = float(value)
-            der = float(der)
+            scalarinput = (isinstance(value, int) or isinstance(value, float))
+            value = np.array(value)
+            value = value.astype(float)
+            if 'der' not in kwargs:
+                try:
+                    ins = kwargs['ins']
+                    ind = kwargs['ind']
+                    if scalarinput:
+                        der = np.zeros(ins)
+                        der[ind] = 1.0
+                    else:
+                        if ins>1:
+                            der = np.zeros((ins, len(value)))
+                            der[ind, :] = 1.0 #np.ones(len(value))
+                        else:
+                            der = np.ones(len(value))
+                except:
+                    raise KeyError('Must provide ins and ind if der not provided.')
+            else:
+                der = kwargs['der']
+                der = np.array(der)
+                der = der.astype(float)
+                if 'ins' in kwargs:
+                    ins = kwargs['ins']
+                    if len(der) != ins:
+                        raise ValueError('Shape of derivative does not match number of inputs.')
         except:
-            raise TypeError('Value and derivative of ADnum object must be numeric.')
+            raise ValueError('Value and derivative of ADnum object must be numeric.')
         self.val = value
         self.der = der
+        if 'graph' not in kwargs:
+            self.graph = {}
+        else:
+            self.graph = kwargs['graph']
+        if 'constant' not in kwargs:
+            self.constant = 0
+        else:
+            self.constant = kwargs['constant']
 
     def __mul__(self,other):
         try:
-            return ADnum(self.val*other.val, self.val*other.der+self.der*other.val)
+            graph = merge_dicts(self.graph, other.graph)
+            y = ADnum(self.val*other.val, der = self.val*other.der+self.der*other.val)
+            y.graph = graph
+            if self not in y.graph:
+                y.graph[self] = []
+            y.graph[self].append((y, 'multiply'))
+            if other not in y.graph:
+                y.graph[other] = []
+            y.graph[other].append((y, 'multiply'))
+            return y
         except AttributeError:
-            other = ADnum(other, 0)
+            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)), constant = 1)
             return self*other
-            
+
     def __rmul__(self,other):
         return self.__mul__(other)
 
     def __add__(self,other):
         try:
-            return ADnum(self.val+other.val, self.der+other.der)
+            graph = merge_dicts(self.graph, other.graph)
+            y = ADnum(self.val+other.val, der = self.der+other.der)
+            y.graph = graph
+            if self not in y.graph:
+                y.graph[self] = []
+            y.graph[self].append((y, 'add'))
+            if other not in y.graph:
+                y.graph[other] = []
+            y.graph[other].append((y, 'add'))
+            return y        
         except AttributeError:
-            other = ADnum(other, 0)
+            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)), constant = 1)
             return self + other
 
     def __radd__(self,other):
@@ -54,43 +104,93 @@ class ADnum:
 
     def __sub__(self,other):
         try:
-            return ADnum(self.val-other.val,self.der-other.der)
+            graph = merge_dicts(self.graph, other.graph)
+            y = ADnum(self.val-other.val,der = self.der-other.der)
+            y.graph = graph
+            if self not in y.graph:
+                y.graph[self] = []
+            y.graph[self].append((y, 'subtract'))
+            if other not in y.graph:
+                y.graph[other] = []
+            y.graph[other].append((y, 'subtract'))
+            return y
         except AttributeError:
-            other = ADnum(other, 0)
+            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)), constant = 1)
             return self-other
 
     def __rsub__(self, other):
         try:
-            return ADnum(other.val-self.val, other.der-self.der)
+            return ADnum(other.val-self.val, der = other.der-self.der)
         except AttributeError:
-            other = ADnum(other, 0)
+            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)), constant = 1)
             return other-self
 
     def __truediv__(self, other):
         try:
-            return ADnum(self.val/other.val, (other.val*self.der-self.val*other.der)/(other.val**2))
+            graph = merge_dicts(self.graph, other.graph)
+            y = ADnum(self.val/other.val, der = (other.val*self.der-self.val*other.der)/(other.val**2))
+            y.graph = graph
+            if self not in y.graph:
+                y.graph[self] = []
+            y.graph[self].append((y, 'divide'))
+            if other not in y.graph:
+                y.graph[other] = []
+            y.graph[other].append((y, 'divide'))
+            return y
         except AttributeError:
-            other = ADnum(other, 0)
+            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)), constant = 1)
             return self/other
     
     def __rtruediv__(self, other):
         try:
-            return ADnum(other.val/self.val, (self.val*other.der-other.val*self.der)/(self.val**2))
+            return ADnum(other.val/self.val, der = (self.val*other.der-other.val*self.der)/(self.val**2))
         except AttributeError:
-            other = ADnum(other, 0)
+            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)), constant = 1)
             return other/self
 
     def __pow__(self, other, modulo=None):
         try:
-            return ADnum(self.val**other.val, other.val*(self.val**(other.val-1))*self.der+(self.val**other.val)*np.log(np.abs(self.val))*other.der)
-
+            graph = merge_dicts(self.graph, other.graph)
+            if self.val == 0:
+                y = ADnum(self.val**other.val, der = other.val*(self.val**(other.val-1))*self.der+(self.val**other.val))
+            else:
+                y = ADnum(self.val**other.val, der = other.val*(self.val**(other.val-1))*self.der+(self.val**other.val)*np.log(np.abs(self.val))*other.der)
+            y.graph = graph
+            if self not in y.graph:
+                y.graph[self] = []
+            y.graph[self].append((y, 'pow'))
+            if other not in y.graph:
+                y.graph[other] = []
+            y.graph[other].append((y, 'pow'))
+            return y
         except AttributeError:
-            other = ADnum(other, 0)
+            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)), constant = 1)
             return self**other
 
     def __rpow__(self, other):
         try:
-            return ADnum(other.val**self.val, self.val*(other.val**(self.val-1))*other.der+(other.val**self.val)*np.log(other.val)*self.der)
+            return ADnum(other.val**self.val, der = self.val*(other.val**(self.val-1))*other.der+(other.val**self.val)*np.log(other.val)*self.der)
         except AttributeError:
-            other = ADnum(other, 0)
+            other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)), constant = 1)
             return other**self
+
+def merge_dicts(d1, d2):
+    ''' Function to merge two dictionaries.
+
+    INPUTS
+    ======
+    d1 : dictionary
+    d2 : dictionary
+
+    OUTPUTS
+    =======
+    dnew : new dictionary that is a combination of d1 and d2
+
+    '''
+    dnew = d1.copy()
+    for key in d2:
+        if key in dnew:
+            dnew[key] = dnew[key]+d2[key]
+        else:
+            dnew[key] = d2[key]
+    return dnew
