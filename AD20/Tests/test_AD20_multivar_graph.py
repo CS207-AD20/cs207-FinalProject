@@ -2,6 +2,8 @@ import pytest
 import AD20
 import numpy as np
 import networkx as nx
+import matplotlib
+import pandas
 from AD20.ADnum_multivar_graph import ADnum
 from AD20 import ADmath_multivar_graph as ADmath
 from AD20 import ADgraph
@@ -331,7 +333,7 @@ def test_get_labels():
     labs = ADgraph.get_labels(Y)
     assert labs[X] == 'X0'
     assert labs[Y] == 'X2'
-    assert len(labs) == 3
+    assert len(labs) == 4
 
 def test_get_colorsandsizes():
     X = ADnum(1, der =1)
@@ -340,10 +342,8 @@ def test_get_colorsandsizes():
     G = ADgraph.gen_graph(Y)
     cols = ADgraph.get_colors(G, Y, labs)
     sizes = ADgraph.get_sizes(G, Y, labs)
-    assert len(cols)==4
-    assert len(sizes) ==4
-    assert cols[X] == 'magenta'
-    assert cols[Y] == 'green'
+    assert len(cols)== 4
+    assert len(sizes) == 4
 
 def test_draw_graph():
     X = ADnum(1, der =1)
@@ -360,7 +360,8 @@ def test_gen_table():
 
 def test_plot_ADnum():
     X = ADnum(1, der =1)
-    Y = ADmath.sin(X)+3
+    def Y(x):
+        return ADmath.sin(x)
     fig = ADgraph.plot_ADnum(Y)
     assert type(fig)==matplotlib.figure.Figure
     
