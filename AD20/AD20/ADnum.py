@@ -8,8 +8,10 @@ class ADnum:
     ATTRIBUTES
     ==========
     val : scalar for scalar valued quantities or numpy array for vector valued functions, the value of the ADnum object for a set input value
-    der: scalar for sclar functions of a single variable or numpy array for functions of multiple variables the derivative 
-    
+    der : scalar for sclar functions of a single variable or numpy array for functions of multiple variables the derivative 
+    graph : dictionary containing the edges of the computational graph
+    constant : 0 or 1 indicating whether the ADnum object is constant
+
     METHODS
     =======
     This class overloads the methods for basic arithmetic operations.
