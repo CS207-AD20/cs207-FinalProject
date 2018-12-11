@@ -313,12 +313,18 @@ def test_vecinput():
     assert np.array_equal(x.val, np.array([1., 2., 3.]))
     assert np.array_equal(x.der, np.array([1., 1., 1.]))
 
+def test_vecinput_multi():
+    x = ADnum([1, 2, 3], ins =2 , ind =0)
+    assert np.array_equal(x.der, np.array([1., 1., 1.],[0., 0., 0.]])
+
 #Graph testing
 def test_gen_graph():
     d = {'y': [('x', 'test')]}
     Y = ADnum(1, der = 1, graph = d)
     G= ADgraph.gen_graph(Y)
     assert 'y' in G
+    assert 'x' in G
+    assert ('y', 'x') in G
 
 def test_reverse_graph():
     d = {'y': [('x', 'test')]}
