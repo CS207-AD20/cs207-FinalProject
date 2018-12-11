@@ -325,6 +325,8 @@ def test_gen_graph():
     assert 'y' in G
     assert 'x' in G
     assert type(G) == nx.classes.digraph.DiGraph
+    assert G.number_of_nodes()==2
+    assert G.number_of_edges()==1
 
 def test_reverse_graph():
     d = {'y': [('x', 'test')]}
