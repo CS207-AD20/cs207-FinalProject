@@ -330,14 +330,14 @@ def test_get_labels():
     Y = ADmath.sin(X)+3
     labs = ADgraph.get_labels(Y)
     assert labs[X] == 'X0'
-    assert labs[Y] == 'X1'
+    assert labs[Y] == 'X2'
     assert len(labs) == 3
 
 def test_get_colorsandsizes():
     X = ADnum(1, der =1)
     Y = ADmath.sin(X)+3
     labs = ADgraph.get_labels(Y)
-    G = gen_graph(Y)
+    G = ADgraph.gen_graph(Y)
     cols = ADgraph.get_colors(G, Y, labs)
     sizes = ADgraph.get_sizes(G, Y, labs)
     assert len(cols)==3
@@ -345,3 +345,21 @@ def test_get_colorsandsizes():
     assert cols[X] == 'magenta'
     assert cols[Y] == 'green'
 
+def test_gen_graph():
+    X = ADnum(1, der =1)
+    Y = ADmath.sin(X)+3
+    fig = ADgraph.draw_graph(Y)
+    assert type(fig) == Figure
+
+def test_gen_table():
+    X = ADnum(1, der =1)
+    Y = ADmath.sin(X)+3
+    dat = ADgraph.gen_table(Y)
+    
+
+def test_plot_ADnum():
+    X = ADnum(1, der =1)
+    Y = ADmath.sin(X)+3
+    fig = ADgraph.plot_ADnum(Y)
+    assert type(fig)==Figure
+    
