@@ -152,7 +152,10 @@ class ADnum:
     def __pow__(self, other, modulo=None):
         try:
             graph = merge_dicts(self.graph, other.graph)
-            y = ADnum(self.val**other.val, der = other.val*(self.val**(other.val-1))*self.der+(self.val**other.val)*np.log(np.abs(self.val))*other.der)
+            if self.val == 0:
+                y = ADnum(self.val**other.val, der = other.val*(self.val**(other.val-1))*self.der+(self.val**other.val))
+            else:
+                y = ADnum(self.val**other.val, der = other.val*(self.val**(other.val-1))*self.der+(self.val**other.val)*np.log(np.abs(self.val))*other.der)
             y.graph = graph
             if self not in y.graph:
                 y.graph[self] = []

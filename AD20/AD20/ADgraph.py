@@ -9,6 +9,8 @@ from AD20.ADnum_multivar_graph import ADnum
 def gen_graph(y):
     G = nx.DiGraph()
     d = y.graph
+    if len(d)== 0:
+        G.add_node(y)
     for key in d:
         G.add_node(key)
         neighbors = d[key]
@@ -48,6 +50,7 @@ def get_labels(y):
 
 def get_colors(G, y, labs):
     colors = []
+    parents = reverse_graph(y)
     for node in G:
         if node.constant:
             colors.append('blue')
@@ -55,10 +58,11 @@ def get_colors(G, y, labs):
             if node == y:
                 colors.append('green')
             else:
-                if labs[node] == 'X0':
-                    colors.append('magenta')
+                if node in parents:
+                    colors.append('red')#if labs[node] == 'X0':
+                 #   colors.append('magenta')
                 else:
-                    colors.append('red')
+                    colors.append('magenta')
     return colors
 
 def get_sizes(G, y, labs):
@@ -68,8 +72,8 @@ def get_sizes(G, y, labs):
         sizes.append(len(label)*200)
     return sizes
 
-def draw_graph(y):
-    fig = plt.figure(figsize = (1000, 1000))
+def draw_graph(y):    
+    fig = plt.figure()
     G = gen_graph(y)
     edge_labs = nx.get_edge_attributes(G, 'label')
     pos = nx.spring_layout(G)
@@ -81,7 +85,7 @@ def draw_graph(y):
     red_patch = mpatches.Patch(color = 'red', label = 'intermediate')
     blue_patch = mpatches.Patch(color = 'blue', label = 'constant')
     green_patch = mpatches.Patch(color = 'green', label = 'output')
-    plt.legend([mag_patch, red_patch, blue_patch, green_patch])
+    plt.legend(handles = [mag_patch, red_patch, blue_patch, green_patch])
     plt.show()
     return fig
 
@@ -91,7 +95,7 @@ def gen_table(y):
     visited = []
     data = {}
     data['Trace'] = []
-    data['Elementary Operation']=[]
+    data['Operation']=[]
     data['Value']= []
     data['Derivative']=[]
     nodes = [y]
@@ -106,15 +110,20 @@ def gen_table(y):
                 data['Value'].append(node.val)
                 data['Derivative'].append(node.der)
                 if node in parents:
-                    link = parents[node][0][1]
+                    if len(parents[node]) == 1:
+                        link = parents[node][0][1]+'('+labs[parents[node][0][0]]+')'
+                    else:
+                        link = parents[node][0][1]+'(' +labs[parents[node][0][0]]+ ' , ' + labs[parents[node][1][0]] + ')'
                     neighbors = parents[node]
                     for neighbor in neighbors:
                         nodes.append(neighbor[0])
                 else:
                     link = 'input'
-                data['Elementary Operation'].append(link)
-
-    return pd.DataFrame.from_dict(data)
+                data['Operation'].append(link)
+    result = pd.DataFrame.from_dict(data)
+    result2 = result.sort_values('Trace')
+    resultorder = result2[['Trace', 'Operation', 'Value', 'Derivative']]  
+    return resultorder
 
 def plot_ADnum(x, xmin = -10, xmax = 10):
     '''Function to plot f and its derivative for single variable input'''
