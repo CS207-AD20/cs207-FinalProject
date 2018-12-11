@@ -4,6 +4,7 @@ import numpy as np
 import networkx as nx
 from AD20.ADnum_multivar_graph import ADnum
 from AD20 import ADmath_multivar_graph as ADmath
+from AD20 import ADgraph
 
 #ADnum unit tests
 def test_ADnum_init():
@@ -314,20 +315,20 @@ def test_vecinput():
 def test_gen_graph():
     d = {'y': [('x', 'test')]}
     Y = ADnum(1, der = 1, graph = d)
-    G= gen_graph(Y)
+    G= ADgraph.gen_graph(Y)
     assert 'y' in G
 
 def test_reverse_graph():
     d = {'y': [('x', 'test')]}
     rd = {'x': [('y', 'test')]}
     Y = ADnum(1, der =1, graph = d)
-    rg = reverse_graph(y)
+    rg = ADgraph.reverse_graph(y)
     assert rd == rg
 
 def test_get_labels():
     X = ADnum(1, der =1)
     Y = ADmath.sin(X)+3
-    L = get_labels(Y)
+    L = ADgraph.get_labels(Y)
     assert labs[X] == 'X0'
     assert labs[Y] == 'X1'
     assert len(labs) == 3
