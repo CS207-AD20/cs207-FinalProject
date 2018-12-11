@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="AD20",
-    version="0.0.2",
+    version="0.0.3",
     author="Lindsey Brown, Xinyue Wang, Kevin Yoon",
     author_email=" ",
     description="Automatic Differentiation package",
