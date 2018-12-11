@@ -171,6 +171,8 @@ class ADnum:
         except AttributeError:
             other = ADnum(other*np.ones(np.shape(self.val)), der = np.zeros(np.shape(self.der)), constant = 1)
             return other**self
+#    def __eq__(self, other):
+ #return hash(self) == hash(other)
 
 def merge_dicts(d1, d2):
     dnew = d1.copy()
@@ -180,8 +182,3 @@ def merge_dicts(d1, d2):
         else:
             dnew[key] = d2[key]
     return dnew
-    #def __eq__(self, other):
-     #   return (self.val == other.val) and (self.der == other.der) and (self.graph == other.graph)
-
-    #def __neq__(self, other):
-     #   return (not self == other)

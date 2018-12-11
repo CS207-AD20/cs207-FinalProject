@@ -4,14 +4,6 @@ import numpy as np
 import pandas as pd
 from AD20.ADnum_multivar_graph import ADnum
 
-def merge_dicts(d1, d2):
-    dnew = d1.copy()
-    for key in d2:
-        if key in dnew:
-            dnew[key] = dnew[key]+d2[key]
-        else:
-            dnew[key] = d2[key]
-    return dnew
 
 def gen_graph(y):
     G = nx.DiGraph()
@@ -48,8 +40,6 @@ def get_labels(y):
                 new_names[node] = 'X' + str(total)
                 total = total - 1
             if node in parents:
-                neighbors = parents[node]
-                for neighbor in neighbors:
                     nodes.append(neighbor[0])
     return new_names
 
