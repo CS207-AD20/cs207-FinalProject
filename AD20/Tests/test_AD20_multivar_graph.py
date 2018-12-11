@@ -1,6 +1,7 @@
 import pytest
 import AD20
 import numpy as np
+import networkx as nx
 from AD20.ADnum_multivar_graph import ADnum
 from AD20 import ADmath_multivar_graph as ADmath
 
@@ -308,3 +309,26 @@ def test_vecinput():
     x = ADnum([1, 2, 3], ins = 1, ind = 0)
     assert np.array_equal(x.val, np.array([1., 2., 3.]))
     assert np.array_equal(x.der, np.array([1., 1., 1.]))
+
+#Graph testing
+def test_gen_graph():
+    d = {'y': [('x', 'test')]}
+    Y = ADnum(1, der = 1, graph = d)
+    G= gen_graph(Y)
+    assert 'y' in G
+
+def test_reverse_graph():
+    d = {'y': [('x', 'test')]}
+    rd = {'x': [('y', 'test')]}
+    Y = ADnum(1, der =1, graph = d)
+    rg = reverse_graph(y)
+    assert rd == rg
+
+def test_get_labels():
+    X = ADnum(1, der =1)
+    Y = ADmath.sin(X)+3
+    L = get_labels(Y)
+    assert labs[X] == 'X0'
+    assert labs[Y] == 'X1'
+    assert len(labs) == 3
+
