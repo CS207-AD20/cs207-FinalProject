@@ -315,7 +315,7 @@ def test_vecinput():
 
 def test_vecinput_multi():
     x = ADnum([1, 2, 3], ins =2 , ind =0)
-    assert np.array_equal(x.der, np.array([1., 1., 1.],[0., 0., 0.]])
+    assert np.array_equal(x.der, np.array([[1., 1., 1.],[0., 0., 0.]])
 
 #Graph testing
 def test_gen_graph():
