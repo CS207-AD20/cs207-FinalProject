@@ -324,6 +324,7 @@ def test_gen_graph():
     G= ADgraph.gen_graph(Y)
     assert 'y' in G
     assert 'x' in G
+    assert type(G) == networkx.classes.digraph.DiGraph
 
 def test_reverse_graph():
     d = {'y': [('x', 'test')]}
