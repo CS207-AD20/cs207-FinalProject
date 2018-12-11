@@ -322,14 +322,26 @@ def test_reverse_graph():
     d = {'y': [('x', 'test')]}
     rd = {'x': [('y', 'test')]}
     Y = ADnum(1, der =1, graph = d)
-    rg = ADgraph.reverse_graph(y)
+    rg = ADgraph.reverse_graph(Y)
     assert rd == rg
 
 def test_get_labels():
     X = ADnum(1, der =1)
     Y = ADmath.sin(X)+3
-    L = ADgraph.get_labels(Y)
+    labs = ADgraph.get_labels(Y)
     assert labs[X] == 'X0'
     assert labs[Y] == 'X1'
     assert len(labs) == 3
+
+def test_get_colorsandsizes():
+    X = ADnum(1, der =1)
+    Y = ADmath.sin(X)+3
+    labs = ADgraph.get_labels(Y)
+    G = gen_graph(Y)
+    cols = ADgraph.get_colors(G, Y, labs)
+    sizes = ADgraph.get_sizes(G, Y, labs)
+    assert len(cols)==3
+    assert len(sizes) ==3
+    assert cols[X] == 'magenta'
+    assert cols[Y] == 'green'
 
