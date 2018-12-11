@@ -201,7 +201,7 @@ def test_ADmath_log():
     assert f.der == 1/72
     assert len(f.graph) == 1
 
-def test_ADmath_log():
+def test_ADmath_logistic():
     f = ADmath.logistic(ADnum(0, der=1))
     assert f.val == .5
     assert f.der == .25
