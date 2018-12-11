@@ -163,6 +163,10 @@ def log(X):
     except AttributeError:
         return np.log(X)
 
+def logistic(X):
+    return 1/(1+exp(-X))
+
+
 def sqrt(X):
     try:
         y = ADnum(np.sqrt(X.val), der = X.der/(2*np.sqrt(X.val)))
