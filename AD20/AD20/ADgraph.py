@@ -1,5 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 import numpy as np
 import pandas as pd
 from AD20.ADnum_multivar_graph import ADnum
@@ -40,6 +41,8 @@ def get_labels(y):
                 new_names[node] = 'X' + str(total)
                 total = total - 1
             if node in parents:
+                neighbors = parents[node]
+                for neighbor in neighbors:
                     nodes.append(neighbor[0])
     return new_names
 
@@ -66,7 +69,7 @@ def get_sizes(G, y, labs):
     return sizes
 
 def draw_graph(y):
-    fig = plt.figure()
+    fig = plt.figure(figsize = (1000, 1000))
     G = gen_graph(y)
     edge_labs = nx.get_edge_attributes(G, 'label')
     pos = nx.spring_layout(G)
@@ -74,6 +77,11 @@ def draw_graph(y):
     nx.draw_networkx(G, pos, labels = labs, node_color = get_colors(G, y, labs), node_size = get_sizes(G, y, labs), font_color= 'white')
     nx.draw_networkx_edge_labels(G, pos, edge_labels = edge_labs)
     limits = plt.axis('off')
+    mag_patch = mpatches.Patch(color = 'magenta', label = 'input')
+    red_patch = mpatches.Patch(color = 'red', label = 'intermediate')
+    blue_patch = mpatches.Patch(color = 'blue', label = 'constant')
+    green_patch = mpatches.Patch(color = 'green', label = 'output')
+    plt.legend([mag_patch, red_patch, blue_patch, green_patch])
     plt.show()
     return fig
 
