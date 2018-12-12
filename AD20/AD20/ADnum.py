@@ -66,6 +66,14 @@ class ADnum:
         else:
             self.constant = kwargs['constant']
 
+    def __neg__(self):
+        y = ADnum(-self.val, der = -self.der)
+        y.graph = self.graph
+        if self not in y.graph:
+            y.graph[self] = []
+        y.graph[self].append((y, 'neg'))
+        return y
+
     def __mul__(self,other):
         try:
             graph = merge_dicts(self.graph, other.graph)
