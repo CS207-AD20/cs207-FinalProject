@@ -44,6 +44,13 @@ def test_graphiput():
     z = ADnum(1, der = 1, graph = {'a': 1})
     assert z.graph == {'a':1}
 
+def test_neg():
+    x = ADnum(4, der =1)
+    f = -x
+    assert f.val == -4.0
+    assert f.der == -1.0
+    assert len(f.graph)==1
+
 def test_ADnum_mul():
     x = ADnum(3.0, der = 1)
     f = x*2.0
